@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Oscars Prediction Dashboard - Classic Gold</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@100;300;400;500;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#f2d00d",
+                        "background-light": "#f8f8f5",
+                        "background-dark": "#221f10",
+                    },
+                    fontFamily: {
+                        "display": ["Be Vietnam Pro", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #2d2a1a;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #494322;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-white min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 w-full border-b border-solid border-[#494322] bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md px-6 lg:px-20 py-3">
+<div class="max-w-[1400px] mx-auto flex items-center justify-between gap-4">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-8">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M36.7273 44C33.9891 44 31.6043 39.8386 30.3636 33.69C29.123 39.8386 26.7382 44 24 44C21.2618 44 18.877 39.8386 17.6364 33.69C16.3957 39.8386 14.0109 44 11.2727 44C7.25611 44 4 35.0457 4 24C4 12.9543 7.25611 4 11.2727 4C14.0109 4 16.3957 8.16144 17.6364 14.31C18.877 8.16144 21.2618 4 24 4C26.7382 4 29.123 8.16144 30.3636 14.31C31.6043 8.16144 33.9891 4 36.7273 4C40.7439 4 44 12.9543 44 24C44 35.0457 40.7439 44 36.7273 44Z" fill="currentColor"></path>
+</svg>
+</div>
+<h1 class="hidden md:block text-xl font-black leading-tight tracking-tight uppercase">Oscars Prediction</h1>
+</div>
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-primary text-sm font-bold uppercase tracking-widest border-b-2 border-primary pb-1" href="#">Ballot</a>
+<a class="text-white/70 hover:text-white text-sm font-bold uppercase tracking-widest transition-colors" href="#">Leaderboard</a>
+<a class="text-white/70 hover:text-white text-sm font-bold uppercase tracking-widest transition-colors" href="#">Rules</a>
+</nav>
+<div class="flex items-center gap-3">
+<div class="flex flex-col items-end mr-2">
+<span class="bg-primary text-background-dark text-[10px] font-black px-1.5 py-0.5 rounded uppercase leading-none mb-1">My Points</span>
+<span class="text-white text-lg font-bold leading-none">450</span>
+</div>
+<div class="h-10 w-[1px] bg-[#494322] mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-xs text-white/50 font-medium">Global Rank</p>
+<p class="text-sm text-white font-bold">#1,204</p>
+</div>
+<div class="size-10 rounded-full border-2 border-primary p-0.5">
+<div class="w-full h-full rounded-full bg-cover bg-center" data-alt="User profile avatar with gold border" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCD6k69laHRBeFHpI2BYK5zE2sr-9dg5MKWdJiaR6eKvtv40xbwFvFuYSvLzPFBb-OYEgUD_NRdlKXGVNQsTOfPn_7KWoP05INUgUcPyj24l_Cxo-2ciAWb2NwbVYMbLX4FRVcKxi1pw_E_BlpZv9zQxF-Im1tKmmXxIZFzaIqcHxF2qxdPWqx8BgdxQ0LwR6pWQsUV9Z8dzBg8NCTuG8Az8Eio_eCpadli82StY7ATEBYUlcw0rP6NvFyVkv_5zDw1iTZjYUI8VCM");'></div>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1400px] mx-auto px-6 lg:px-20 py-10 grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left Content Area -->
+<div class="lg:col-span-8 flex flex-col gap-8">
+<!-- Hero Heading -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 bg-[#2d2a1a] p-8 rounded-xl border border-[#494322] relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -mr-20 -mt-20 blur-3xl"></div>
+<div class="relative z-10">
+<h2 class="text-white text-5xl font-black leading-tight tracking-[-0.033em] mb-2">96th Academy Awards</h2>
+<p class="text-[#cbc290] text-lg font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">schedule</span>
+                        Ceremony begins in 4h 12m
+                    </p>
+</div>
+<button class="relative z-10 flex min-w-[180px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-6 bg-primary text-background-dark text-base font-black uppercase tracking-wider hover:bg-yellow-400 transition-all shadow-[0_0_20px_rgba(242,208,13,0.3)]">
+                    Lock Predictions
+                </button>
+</div>
+<!-- Best Picture Section -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between border-b border-[#494322] pb-3">
+<h3 class="text-white text-2xl font-bold tracking-tight">Best Picture</h3>
+<span class="text-primary text-xs font-bold uppercase tracking-widest px-2 py-1 bg-primary/10 rounded">25 Points</span>
+</div>
+<!-- Nominee Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-4">
+<!-- Nominee Card -->
+<div class="group relative bg-background-dark/50 border border-[#494322] rounded-xl overflow-hidden cursor-pointer hover:border-primary/50 transition-all">
+<div class="aspect-[2/3] bg-cover bg-center" data-alt="Oppenheimer movie poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuClvY7yUVQLOGWa4hWiWC90rxHWv_bRgtVnBghC8K25glhBcvdpH6ts44sxwWu0xoAsxg1gDI799X1ODGF9qLxvoVvTEhLzIQ9FcZRqUVcdhPI1IGWc9OAvWsJrnBo3hwYJc9N1DLUeqWielM09B7KkagkTdUUtYo6xbe6gCyyeMLaJrpZfuZToLEjSmQmQ9C-lxzUrxEwmk2A_Gs6NbzUyZvd5uR8pvCF08478MXIyWdc71xZN6ap1ADIRi8EFM2sskFpyPRhf6Qg");'>
+<div class="w-full h-full bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-4">
+<p class="text-white text-sm font-bold leading-snug">Oppenheimer</p>
+</div>
+</div>
+<label class="absolute inset-0 flex items-start justify-end p-2 cursor-pointer">
+<input checked="" class="w-6 h-6 border-2 border-white/20 bg-transparent rounded-full checked:bg-primary checked:border-primary focus:ring-0 focus:ring-offset-0 transition-all" name="best-picture" type="radio"/>
+</label>
+</div>
+<div class="group relative bg-background-dark/50 border border-[#494322] rounded-xl overflow-hidden cursor-pointer hover:border-primary/50 transition-all">
+<div class="aspect-[2/3] bg-cover bg-center" data-alt="Killers of the Flower Moon poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBlGmvgGp_rcL8eFPO8Qlp44ScrpPUpfhnfyvbtRJrJhJ3b7xh4DG2JkQVoWF7SDIJAdOs58eVxPaZj02NisMZ-Ik2yq-O11hpODV8MjUqXl186rH2ATq3UDLTERL495DSgNJ_JwkRZwpUt6RzRqLshSY_RAbMf0u0NH-ZE0upsYIl-y8NNa5G99CJ6MnICYrC58zIDm6s5BDUJ2Zvs74K6m_It0LEiyutNY2cDBlbLDEws3AeaSm--KCVUxjccpLQ9pAuWy-wwnWs");'>
+<div class="w-full h-full bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-4">
+<p class="text-white text-sm font-bold leading-snug">Killers of the Flower Moon</p>
+</div>
+</div>
+<label class="absolute inset-0 flex items-start justify-end p-2 cursor-pointer">
+<input class="w-6 h-6 border-2 border-white/20 bg-transparent rounded-full checked:bg-primary checked:border-primary focus:ring-0 focus:ring-offset-0 transition-all" name="best-picture" type="radio"/>
+</label>
+</div>
+<div class="group relative bg-background-dark/50 border border-[#494322] rounded-xl overflow-hidden cursor-pointer hover:border-primary/50 transition-all">
+<div class="aspect-[2/3] bg-cover bg-center" data-alt="Barbie movie poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAc77UYTCZNlS0JScEm44wXvgcu81hH4Cx15PxsTmydOceksW9oX32Wd--slk-9g5ksW5yB0tnfKhH7qna_xDdw_sHGO_b4r6B04ZVdHLzmQ1p6uMopQZRzP9A_bXMv9SXLncs6sZZGmXTdVLCVmIvK1fuYtxfCLEjIvhvHisrxfwzJhik6r4Jp52sbbCSdyVoW-iawEBaxbmq6vck6OXlSudhgb9b0-NzoKCckt2W5utctF27T0uYn2ugrJOZf-EW3lkGhhRXo558");'>
+<div class="w-full h-full bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-4">
+<p class="text-white text-sm font-bold leading-snug">Barbie</p>
+</div>
+</div>
+<label class="absolute inset-0 flex items-start justify-end p-2 cursor-pointer">
+<input class="w-6 h-6 border-2 border-white/20 bg-transparent rounded-full checked:bg-primary checked:border-primary focus:ring-0 focus:ring-offset-0 transition-all" name="best-picture" type="radio"/>
+</label>
+</div>
+<div class="group relative bg-background-dark/50 border border-[#494322] rounded-xl overflow-hidden cursor-pointer hover:border-primary/50 transition-all">
+<div class="aspect-[2/3] bg-cover bg-center" data-alt="Poor Things movie poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDipIu7qZ_ud8T6R7NSMQm0kHKsJVIB-6P_mPOSBXQ2aOs-fPhDZN08lahbmt1YdCgETmB2GkC2MZp8TAQBPH7Uul36gau_rc5FDkYJfQgb5BhCG85GaTWXEm0ut8Y-tlQz_KxJPFZYPQYKHpjnzaWsCsL8sVUb8NKPrmWf4JCZgOEeSXOM5ndvIBzEHnWebqs09sw4ZJNPgBTjrZ124vIhGP9jkD_lM-D366c0XaDIoet5b2h9hQTgGRVsClzQmJFG0Dhb4VHacmI");'>
+<div class="w-full h-full bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-4">
+<p class="text-white text-sm font-bold leading-snug">Poor Things</p>
+</div>
+</div>
+<label class="absolute inset-0 flex items-start justify-end p-2 cursor-pointer">
+<input class="w-6 h-6 border-2 border-white/20 bg-transparent rounded-full checked:bg-primary checked:border-primary focus:ring-0 focus:ring-offset-0 transition-all" name="best-picture" type="radio"/>
+</label>
+</div>
+<div class="group relative bg-background-dark/50 border border-[#494322] rounded-xl overflow-hidden cursor-pointer hover:border-primary/50 transition-all">
+<div class="aspect-[2/3] bg-cover bg-center" data-alt="Past Lives movie poster" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBgXgHV3NPjLOzd06b7TWxFB10PVFlnGjk0Dij8HUaKH7-jDZvdGM_XrzkXDPNjg55u16IcpFxgvCYBSnKtZd5-n0ypQ7k2h7nyg9x80jAGB4dN-laIjQ4yQca3pRFYTOB04EUJZPPeqPyMt52uflaifKrNtJQeIwRXeixfdTngnb8bthVMLkkSSuP9waA2otPtBLrlMt_rU167rN5XsTPrYWhxgvmlMaFWJfer_D8A12MD9t-uCHP_9pOD1p0qhR5VGrOLqOR7bU8");'>
+<div class="w-full h-full bg-gradient-to-t from-black/90 via-transparent to-transparent flex flex-col justify-end p-4">
+<p class="text-white text-sm font-bold leading-snug">Past Lives</p>
+</div>
+</div>
+<label class="absolute inset-0 flex items-start justify-end p-2 cursor-pointer">
+<input class="w-6 h-6 border-2 border-white/20 bg-transparent rounded-full checked:bg-primary checked:border-primary focus:ring-0 focus:ring-offset-0 transition-all" name="best-picture" type="radio"/>
+</label>
+</div>
+</div>
+</section>
+<!-- Best Director Section -->
+<section class="flex flex-col gap-4">
+<div class="flex items-center justify-between border-b border-[#494322] pb-3 pt-4">
+<h3 class="text-white text-2xl font-bold tracking-tight">Best Director</h3>
+<span class="text-primary text-xs font-bold uppercase tracking-widest px-2 py-1 bg-primary/10 rounded">15 Points</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<!-- Circular Nominee Row -->
+<div class="flex items-center gap-4 p-4 rounded-xl border-2 border-primary bg-primary/5">
+<div class="size-16 rounded-full bg-cover bg-center border-2 border-primary" data-alt="Christopher Nolan headshot" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAxCJRKtzriq-SRdTN892hy42f_UG06apijhKR2ynNdw5D1PBfkTOCmYk-Dq-Wl9EvKKBJMcCzQjjaK5CXA-RD_ZlSpw6F1JBt2Or6exik2e5kSzAbI9czA5LWMBLfkOrWaEWoMWxEDJDqXcgYoD75N1u2KISxirmrdDBqt1KRPE_YzuINikRLY9ZDXY6iNkVxDrgHy6dQTeeu-NcRjvRRvykGL9vdNFMZfhliSQ3E34mEaDZl2um4OOQKJwuX4eiihU5DDu5CJ97s");'></div>
+<div class="flex-1">
+<p class="text-white font-bold">Christopher Nolan</p>
+<p class="text-white/60 text-xs italic">Oppenheimer</p>
+</div>
+<input checked="" class="w-6 h-6 border-2 border-primary bg-transparent rounded-full checked:bg-primary checked:border-primary focus:ring-0" name="best-director" type="radio"/>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-xl border border-[#494322] bg-white/5 hover:border-white/30 transition-all">
+<div class="size-16 rounded-full bg-cover bg-center" data-alt="Martin Scorsese headshot" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB_l5dBVprZx3_339FLwSseF8PKJ432dprF0quWt4cBk656R8PGsgRCoRWT00fpN5zlRNrsWPe-7ENugr29rc3oEPKBBlSnkLdYQJ3VxqzwtrtuYterHvhG1R53djKOERL7n2TOCAPw_YWJ_U7v9qU9Xs7qHGYeGaCcW7QpwmSLpgjuECc6cPihXnMWOR6T08t7-R0eIrlUC-fM5w8Ps-seUedSh71TGZl9vSXBW8rGSolgVC5ForKIiQ7OYIeegUFc2viVXCfWg1k");'></div>
+<div class="flex-1">
+<p class="text-white font-bold">Martin Scorsese</p>
+<p class="text-white/60 text-xs italic">Killers of the Flower Moon</p>
+</div>
+<input class="w-6 h-6 border-2 border-white/20 bg-transparent rounded-full checked:bg-primary checked:border-primary focus:ring-0" name="best-director" type="radio"/>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-xl border border-[#494322] bg-white/5 hover:border-white/30 transition-all">
+<div class="size-16 rounded-full bg-cover bg-center" data-alt="Greta Gerwig headshot" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBAOGJIYXr20qn-goKuq3MiIHAO-2xOUUpiM8VAXMYbRQPthcEJAvZcQgon6WhvbHsvxgrYh286lvBP_4F173ACTcryf1c5_DdV6X4Gd_jyL4KsDEVGFsGn1e3usULvirS_gwoCvXd3WeHQD4WsgX37V3O76iF9HCuLcdYwAZM_vjey9n3VnjoSldkQyYAj47nKN1yd4QBs0R-Cy4vaR412dPxHCHtTngLElr9pLN3PhjVTwnOm9SqawJzc4DEvjfjoDx7Rs1fG064");'></div>
+<div class="flex-1">
+<p class="text-white font-bold">Greta Gerwig</p>
+<p class="text-white/60 text-xs italic">Barbie</p>
+</div>
+<input class="w-6 h-6 border-2 border-white/20 bg-transparent rounded-full checked:bg-primary checked:border-primary focus:ring-0" name="best-director" type="radio"/>
+</div>
+<div class="flex items-center gap-4 p-4 rounded-xl border border-[#494322] bg-white/5 hover:border-white/30 transition-all">
+<div class="size-16 rounded-full bg-cover bg-center" data-alt="Yorgos Lanthimos headshot" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB-kltMRjko7WQ8HJKOTR9hyMWeHLPIk-PRUitnMe8ujDeU4clXCQuw64DfFW1f_3u0GoPl_Ntcou2XZ6UgqXjAG_5FKK_ikYkqaO8zk1aVF54LfiR0Okf-2l6tO6ivZIxhGOmAwKZc6W1Ku_4kJwICld8_hZ29gK6lgtaKJcKDI6_zCOTqGBDV-gRZ3854Jv5r3PPQCxJAut_oaWFALv66JsjpnW2_uSnk9gt1l32R-Y1Enm-s1ODNVlQbfau9fdb-CGcKv34j4Ys");'></div>
+<div class="flex-1">
+<p class="text-white font-bold">Yorgos Lanthimos</p>
+<p class="text-white/60 text-xs italic">Poor Things</p>
+</div>
+<input class="w-6 h-6 border-2 border-white/20 bg-transparent rounded-full checked:bg-primary checked:border-primary focus:ring-0" name="best-director" type="radio"/>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Sidebar (Leaderboard) -->
+<aside class="lg:col-span-4 flex flex-col gap-6">
+<div class="sticky top-24">
+<div class="bg-[#2d2a1a] border border-[#494322] rounded-xl overflow-hidden shadow-2xl">
+<div class="p-6 border-b border-[#494322] flex items-center justify-between bg-white/5">
+<h4 class="text-white text-lg font-black uppercase tracking-widest flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">emoji_events</span>
+                            Leaderboard
+                        </h4>
+<button class="text-primary text-xs font-bold hover:underline">View All</button>
+</div>
+<div class="p-2 flex flex-col gap-1 max-h-[600px] overflow-y-auto custom-scrollbar">
+<!-- Rank 1 -->
+<div class="flex items-center gap-4 p-3 rounded-lg bg-primary/10 border border-primary/20">
+<div class="text-primary font-black text-sm w-4 italic">1</div>
+<div class="size-10 rounded-full border-2 border-primary overflow-hidden">
+<div class="w-full h-full bg-cover bg-center" data-alt="Leaderboard top user avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAB6MzAzVSBh0hMDc2I0e_DcORdg7PJigVvMk5xnOYO77iUTw9-Mn0OuUZzynwm-SFkRqQLlD8LOeW5hm4RZKAeI-SdPszS67b7MnIC4B5tWg2oviJcfxeoCQSUlG22r499-j3lM7zOXxmoDwKh-FE5amXQEiTwL7TPAVLJvCqqGVKMUmwJoHthMlvHhbYvagKK_-DUA_2KCIyfBngpQnzWTuPw48bm0ZTNu_RJJQP6CuJyzL9qo-syWqIvpugH3OAV8B8LGP-h0kI");'></div>
+</div>
+<div class="flex-1">
+<p class="text-white font-bold text-sm">Sarah Jenkins (You)</p>
+<p class="text-white/40 text-[10px] uppercase font-bold tracking-tighter">Gold Tier Pro</p>
+</div>
+<div class="text-primary font-black text-lg">450</div>
+</div>
+<!-- Rank 2 -->
+<div class="flex items-center gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+<div class="text-white/30 font-black text-sm w-4 italic group-hover:text-white/60">2</div>
+<div class="size-10 rounded-full border border-[#494322] overflow-hidden">
+<div class="w-full h-full bg-cover bg-center" data-alt="Leaderboard second user avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDhfdNcU-hGjnkhz9kf-72uyi6r068hsRADML90yJVPKyfl9g1n8dtmiXbyn0ZZkAF1TbcshPiG1qBv71vOB5vpvTL17xoYqFyDPXBIMOGeY1zFXEEDh5PpSLqWBvp4xGFmpt684hBVbeT-Ff-Fst4j0VTVU5-TXaRUCQwSQllUx573x07hLu6uFGuO5miI5Y7yChrxlFnJb6ZZ091XKN_sFkqBncbr5FIqaOQ7I1f-mSJzSDekjNd9U2tDTawZyfVuNirUcSfnaIA");'></div>
+</div>
+<div class="flex-1">
+<p class="text-white font-bold text-sm">Marcus V.</p>
+<p class="text-white/40 text-[10px] uppercase font-bold tracking-tighter">Film Buff</p>
+</div>
+<div class="text-white/80 font-bold text-lg">435</div>
+</div>
+<!-- Rank 3 -->
+<div class="flex items-center gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+<div class="text-white/30 font-black text-sm w-4 italic group-hover:text-white/60">3</div>
+<div class="size-10 rounded-full border border-[#494322] overflow-hidden">
+<div class="w-full h-full bg-cover bg-center" data-alt="Leaderboard third user avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAHASlRPzGXgNAyGzKlUn4pltzI7fEvEhg6vM6f5X48cIeEI4OXF4P8Yqa37H3xNGx3rPcy6qwXBafBBDg9SP8THBTEHunQfkYD7x8EdYvKXnIpH0E_xpsOScUaQqAzjnapFK20k8x2RBY9S-cjTlAhAla0prHtH2pZUwkB3cDJmQpxYT20g5a1Gti16WGd0Z3ExkJ4OEfbFCv0zbSSfFKVH3yilz41esyvmnpXz-mYzinj301nPDvPp-qEQ6NFz0b0OI5XOGec4_0");'></div>
+</div>
+<div class="flex-1">
+<p class="text-white font-bold text-sm">Leo K.</p>
+<p class="text-white/40 text-[10px] uppercase font-bold tracking-tighter">Critic</p>
+</div>
+<div class="text-white/80 font-bold text-lg">410</div>
+</div>
+<!-- Rank 4 -->
+<div class="flex items-center gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+<div class="text-white/30 font-black text-sm w-4 italic group-hover:text-white/60">4</div>
+<div class="size-10 rounded-full border border-[#494322] overflow-hidden">
+<div class="w-full h-full bg-cover bg-center" data-alt="Leaderboard user avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuBzKpm95wv_3xXfr71eNfokrzYWOjxrcQfzh8FtavOvBY7xrZST_nIFZsSPufeL12K2H3HtfiYoB4KX6JGRwhl0imPs9N3s0lO010PJPjLTjAIJvHyVyzaZcfvTn_eQFjTb9-H6n0tA-Hd2-AbyFRKNY9Y8vgIQj6GlUNFwMFtHOzSBNXid22F3hJifhPCL7dSwlRitHOEsQVum7FD8ADeyOYNSkneVM0zp9mUBxWQS57eHge-W7XVHK8rmrL1XtyCieaGzqrw6HX4");'></div>
+</div>
+<div class="flex-1">
+<p class="text-white font-bold text-sm">Elena S.</p>
+<p class="text-white/40 text-[10px] uppercase font-bold tracking-tighter">Casual Fan</p>
+</div>
+<div class="text-white/80 font-bold text-lg">395</div>
+</div>
+<!-- Rank 5 -->
+<div class="flex items-center gap-4 p-3 rounded-lg hover:bg-white/5 transition-colors group">
+<div class="text-white/30 font-black text-sm w-4 italic group-hover:text-white/60">5</div>
+<div class="size-10 rounded-full border border-[#494322] overflow-hidden">
+<div class="w-full h-full bg-cover bg-center" data-alt="Leaderboard user avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCc3dPoqXc6I29HxNpK4gdfgTH5ZG-Gai6eLoplZde4hs-1fPdYo6fxkUM6aZ2Lwas0cBsaHzE97Ko4fcBUL_mBQkVi9URbOWdCr08VQIgeUD2leA_rAeVKZLaUTKJzxe4hH4pIAoinlqJgPkWbOkTLHdb-05TjLv6fxPPbVBISRq3Wr5uKp4a-40RYEsYNEldVd1qUvToI_NgBRQ3B_03HGOlDOq9ldUmynb6SiY5lpKPxz5f7RXec1ScOI9h4Rm9yxT0dCdoG8rk");'></div>
+</div>
+<div class="flex-1">
+<p class="text-white font-bold text-sm">Daniel Choi</p>
+<p class="text-white/40 text-[10px] uppercase font-bold tracking-tighter">Film Buff</p>
+</div>
+<div class="text-white/80 font-bold text-lg">380</div>
+</div>
+</div>
+<div class="p-6 bg-primary/5 border-t border-[#494322]">
+<div class="flex items-center justify-between mb-4">
+<p class="text-white font-bold text-sm">Invite Friends</p>
+<span class="text-primary text-xs font-black">+50 PTS</span>
+</div>
+<div class="flex gap-2">
+<input class="flex-1 bg-background-dark/50 border border-[#494322] rounded-lg text-xs py-2 px-3 focus:ring-primary focus:border-primary text-white" placeholder="Enter email..." type="text"/>
+<button class="bg-primary text-background-dark p-2 rounded-lg font-black hover:bg-yellow-400 transition-colors">
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Recent Activity/News Mini Card -->
+<div class="mt-6 p-6 rounded-xl border border-[#494322] bg-gradient-to-br from-[#2d2a1a] to-background-dark">
+<h5 class="text-primary text-[10px] font-black uppercase tracking-[0.2em] mb-2">Ceremony Update</h5>
+<p class="text-white text-sm font-bold mb-3">Jimmy Kimmel confirmed as host for the fourth time.</p>
+<a class="text-white/40 text-[10px] font-bold uppercase hover:text-white flex items-center gap-1 transition-colors" href="#">
+                        Read Official Rules
+                        <span class="material-symbols-outlined text-xs">arrow_forward</span>
+</a>
+</div>
+</div>
+</aside>
+</main>
+<!-- Global Progress Bar (Fixed Bottom) -->
+<div class="fixed bottom-0 left-0 w-full bg-background-dark border-t border-[#494322] py-4 px-6 md:px-20 z-50">
+<div class="max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex flex-col w-full md:w-1/3">
+<div class="flex justify-between items-end mb-1">
+<span class="text-white/60 text-[10px] font-black uppercase tracking-widest">Completion</span>
+<span class="text-primary text-xs font-bold">18 / 24 Predicted</span>
+</div>
+<div class="w-full bg-[#494322] h-2 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-3/4 shadow-[0_0_10px_rgba(242,208,13,0.5)]"></div>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden sm:flex flex-col items-center">
+<span class="text-white/40 text-[10px] font-bold uppercase">Estimated Points</span>
+<span class="text-white font-black">1,420 MAX</span>
+</div>
+<button class="flex items-center gap-2 bg-[#494322] hover:bg-[#5a532d] text-white px-6 py-3 rounded-lg font-black uppercase tracking-widest text-xs transition-all border border-[#686031]">
+<span class="material-symbols-outlined text-lg">save</span>
+                    Save Draft
+                </button>
+<button class="bg-primary hover:bg-yellow-400 text-background-dark px-8 py-3 rounded-lg font-black uppercase tracking-widest text-sm transition-all shadow-[0_0_25px_rgba(242,208,13,0.4)]">
+                    Lock All &amp; Submit
+                </button>
+</div>
+</div>
+</div>
+<!-- Extra space for bottom bar -->
+<div class="h-24 md:h-20"></div>
+</body></html>
