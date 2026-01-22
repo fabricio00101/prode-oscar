@@ -44,11 +44,52 @@
 
     <header class="sticky top-0 z-50 w-full border-b border-[#494322] bg-background-dark/90 backdrop-blur-md px-6 py-3">
         <div class="max-w-[1400px] mx-auto flex items-center justify-between">
-            <div class="flex items-center gap-2 text-primary">
-                <span class="material-symbols-outlined">movie_filter</span>
+
+            <a href="{% url 'home' %}"
+                class="flex items-center gap-2 text-primary hover:text-yellow-400 transition group">
+                <span class="material-symbols-outlined group-hover:scale-110 transition-transform">movie_filter</span>
                 <h1 class="text-xl font-black uppercase tracking-widest">Oscars 2026</h1>
-            </div>
-            <div class="text-white font-bold">Mis Puntos: <span class="text-primary">0</span></div>
+            </a>
+
+            <nav class="flex items-center gap-4 sm:gap-6">
+
+                {% if user.is_authenticated %}
+                <a href="{% url 'leaderboard' %}"
+                    class="flex items-center gap-1 text-white hover:text-primary text-xs sm:text-sm font-bold uppercase tracking-widest transition">
+                    <span class="material-symbols-outlined text-lg">emoji_events</span>
+                    <span class="hidden sm:inline">Ranking</span>
+                </a>
+
+                <div class="hidden sm:flex items-center gap-2 bg-[#2d2a1a] px-3 py-1 rounded border border-[#494322]">
+                    <span class="text-[10px] uppercase font-bold text-white/60">Mis Puntos</span>
+                    <span class="text-primary font-black">{{ puntos }}</span>
+                </div>
+
+                <div class="flex items-center gap-3 border-l border-[#494322] pl-4 ml-2">
+                    <span class="hidden md:block text-white text-sm font-bold truncate max-w-[100px]">{{ user.username
+                        }}</span>
+
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit"
+                            class="text-red-400 hover:text-red-300 text-xs font-bold border border-red-900/30 px-3 py-1.5 rounded hover:bg-red-900/20 transition uppercase tracking-wider">
+                            Salir
+                        </button>
+                    </form>
+                </div>
+
+                {% else %}
+                <a href="{% url 'login' %}"
+                    class="text-white hover:text-primary text-sm font-bold uppercase tracking-widest transition">
+                    Ingresar
+                </a>
+                <a href="{% url 'registro' %}"
+                    class="bg-primary text-background-dark px-5 py-2 rounded-lg font-black text-xs sm:text-sm uppercase tracking-widest hover:bg-yellow-400 transition shadow-[0_0_15px_rgba(242,208,13,0.3)] hover:shadow-[0_0_25px_rgba(242,208,13,0.6)]">
+                    Registrarse
+                </a>
+                {% endif %}
+
+            </nav>
         </div>
     </header>
 
