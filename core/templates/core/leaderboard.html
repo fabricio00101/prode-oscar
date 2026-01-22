@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-
-<html class="dark" lang="en"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Oscars 2026 Global Leaderboard</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&amp;family=Noto+Sans:wght@400;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html class="dark" lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Ranking Global - Oscars 2026</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&family=Noto+Sans:wght@400;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script>
         tailwind.config = {
             darkMode: "class",
             theme: {
@@ -21,133 +20,129 @@
                         "border-gold": "#494322",
                         "accent-gold": "#cbc290"
                     },
-                    fontFamily: {
-                        "display": ["Be Vietnam Pro", "sans-serif"]
-                    },
-                    borderRadius: {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
+                    fontFamily: { "display": ["Be Vietnam Pro", "sans-serif"] },
                 },
             },
         }
     </script>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-        body {
-            font-family: 'Be Vietnam Pro', sans-serif;
-        }
-        .gold-glow {
-            box-shadow: 0 0 20px rgba(242, 208, 13, 0.2);
-        }
+    <style>
+        body { font-family: 'Be Vietnam Pro', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
     </style>
 </head>
 <body class="bg-background-light dark:bg-background-dark text-white min-h-screen flex flex-col">
-<!-- Top Navigation Bar -->
-<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-border-gold px-10 py-4 bg-background-light dark:bg-background-dark sticky top-0 z-50">
-<div class="flex items-center gap-8">
-<div class="flex items-center gap-4 text-primary">
-<div class="size-8">
-<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-<path clip-rule="evenodd" d="M24 18.4228L42 11.475V34.3663C42 34.7796 41.7457 35.1504 41.3601 35.2992L24 42V18.4228Z" fill="currentColor" fill-rule="evenodd"></path>
-<path clip-rule="evenodd" d="M24 8.18819L33.4123 11.574L24 15.2071L14.5877 11.574L24 8.18819ZM9 15.8487L21 20.4805V37.6263L9 32.9945V15.8487ZM27 37.6263V20.4805L39 15.8487V32.9945L27 37.6263ZM25.354 2.29885C24.4788 1.98402 23.5212 1.98402 22.646 2.29885L4.98454 8.65208C3.7939 9.08038 3 10.2097 3 11.475V34.3663C3 36.0196 4.01719 37.5026 5.55962 38.098L22.9197 44.7987C23.6149 45.0671 24.3851 45.0671 25.0803 44.7987L42.4404 38.098C43.9828 37.5026 45 36.0196 45 34.3663V11.475C45 10.2097 44.2061 9.08038 43.0155 8.65208L25.354 2.29885Z" fill="currentColor" fill-rule="evenodd"></path>
-</svg>
-</div>
-<h2 class="text-white text-xl font-extrabold leading-tight tracking-[-0.015em] uppercase">Oscars <span class="text-primary">2026</span></h2>
-</div>
-<nav class="hidden md:flex items-center gap-8">
-<a class="text-primary text-sm font-bold border-b-2 border-primary pb-1" href="#">Leaderboard</a>
-<a class="text-accent-gold hover:text-white transition-colors text-sm font-medium leading-normal" href="#">My Predictions</a>
-<a class="text-accent-gold hover:text-white transition-colors text-sm font-medium leading-normal" href="#">Categories</a>
-<a class="text-accent-gold hover:text-white transition-colors text-sm font-medium leading-normal" href="#">Rules</a>
-</nav>
-</div>
-<div class="flex flex-1 justify-end gap-6 items-center">
-<label class="hidden lg:flex flex-col min-w-40 !h-10 max-w-64">
-<div class="flex w-full flex-1 items-stretch rounded-lg h-full border border-border-gold">
-<div class="text-accent-gold flex items-center justify-center pl-4 rounded-l-lg bg-surface-dark">
-<span class="material-symbols-outlined text-[20px]">search</span>
-</div>
-<input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-white focus:outline-0 focus:ring-1 focus:ring-primary border-none bg-surface-dark h-full placeholder:text-accent-gold/50 px-4 rounded-l-none pl-2 text-sm font-normal" placeholder="Search friends..." value=""/>
-</div>
-</label>
-<button class="flex min-w-[100px] cursor-pointer items-center justify-center rounded-lg h-10 px-5 bg-primary text-background-dark text-sm font-bold uppercase tracking-wider hover:bg-yellow-400 transition-all">
-                Profile
-            </button>
-<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary" data-alt="User profile avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuC0eQC6woxlE4DkioO6h2ggo9zzFzVeisSpXgFAdok5Awe1LC7XISE52oS8pDh-bm3GAEr1EOEHEv2ufJTypZnM26W9UsI6e1UW3WmyvhgYXF16p3gEFGLZFlxbtA6eAZdFWOZc2F6nzrzJMhoBHQ9FMCfVyP3od6Is64sUy1APU1g6r5oUNbj5zJ5LvpTUnrSK4tmcM1vYYZEh9XxqX5rzsecP2j9FY21jvJqadsG-whfle2_qyfF-9Ly1dSbmekDKvdzYTwVOXXs");'></div>
-</div>
-</header>
-<main class="flex-1 flex flex-col items-center px-4 py-10 max-w-[1200px] mx-auto w-full">
-<!-- Headline Section -->
-<div class="text-center mb-10">
-<h1 class="text-white tracking-tight text-[40px] font-extrabold leading-tight pb-2 uppercase italic">Global Leaderboard</h1>
-<p class="text-accent-gold text-lg font-medium max-w-2xl mx-auto">Witness the ultimate race to the Academy Awards. Tracking real-time prediction accuracy across 24 categories.</p>
-</div>
-<!-- Tabs -->
-<div class="w-full mb-12">
-<div class="flex justify-center border-b border-border-gold px-4 gap-12">
-<a class="flex flex-col items-center justify-center border-b-[3px] border-primary text-white pb-4 pt-4 px-6 group" href="#">
-<p class="text-white text-sm font-bold uppercase tracking-widest">Global</p>
-</a>
-<a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-accent-gold pb-4 pt-4 px-6 hover:text-white transition-all group" href="#">
-<p class="text-sm font-bold uppercase tracking-widest">Friends</p>
-</a>
-<a class="flex flex-col items-center justify-center border-b-[3px] border-transparent text-accent-gold pb-4 pt-4 px-6 hover:text-white transition-all group" href="#">
-<p class="text-sm font-bold uppercase tracking-widest">Country</p>
-</a>
-</div>
-</div>
-<!-- Podium: Top 3 -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mb-16 items-end">
-<div class="flex flex-col gap-2">
-    {% for jugador in usuarios %}
-    <div class="grid grid-cols-12 gap-4 px-6 py-4 items-center rounded-lg border border-border-gold/30 hover:border-primary/50 hover:bg-surface-dark transition-all group {% if request.user == jugador %}bg-primary/5 border-primary{% endif %}">
-        
-        <div class="col-span-1">
-            {% if forloop.counter == 1 %}
-                <span class="material-symbols-outlined text-primary text-3xl">emoji_events</span> {% elif forloop.counter == 2 %}
-                <span class="text-2xl font-black text-gray-300">#2</span>
-            {% elif forloop.counter == 3 %}
-                <span class="text-2xl font-black text-[#cd7f32]">#3</span> {% else %}
-                <span class="text-xl font-bold text-gray-500">#{{ forloop.counter }}</span>
-            {% endif %}
-        </div>
 
-        <div class="col-span-5 flex items-center gap-4">
-            <div class="size-10 rounded-full bg-[#221f10] border border-primary/30 flex items-center justify-center text-primary font-bold">
-                {{ jugador.username|slice:":1"|upper }} </div>
-            <div>
-                <p class="text-white font-bold text-lg leading-none">
-                    {{ jugador.username }} 
-                    {% if request.user == jugador %} <span class="text-xs text-primary ml-2">(Tú)</span> {% endif %}
-                </p>
-                <p class="text-xs text-gray-500 uppercase tracking-widest mt-1">
-                    {% if forloop.counter == 1 %}Current Leader{% else %}Contender{% endif %}
-                </p>
+<header class="flex flex-col md:flex-row items-center justify-between border-b border-border-gold px-6 md:px-10 py-4 bg-background-dark sticky top-0 z-50 gap-4">
+    <div class="flex items-center gap-8 w-full md:w-auto justify-between md:justify-start">
+        <a href="{% url 'home' %}" class="flex items-center gap-2 text-primary hover:scale-105 transition-transform">
+            <span class="material-symbols-outlined text-3xl">movie_filter</span>
+            <h2 class="text-white text-xl font-extrabold uppercase tracking-tight">Oscars <span class="text-primary">2026</span></h2>
+        </a>
+        
+        <nav class="hidden md:flex items-center gap-6">
+            <a class="text-primary text-sm font-bold border-b-2 border-primary pb-1 cursor-default" href="#">Ranking</a>
+            <a class="text-accent-gold hover:text-white transition-colors text-sm font-medium" href="{% url 'home' %}">Mis Predicciones</a>
+            <a class="text-accent-gold hover:text-white transition-colors text-sm font-medium" href="{% url 'home' %}">Categorías</a>
+        </nav>
+    </div>
+
+    <div class="flex flex-1 justify-end gap-4 items-center w-full md:w-auto">
+        <form method="GET" class="w-full md:max-w-xs">
+            <div class="flex items-center rounded-lg border border-border-gold bg-surface-dark overflow-hidden focus-within:ring-1 focus-within:ring-primary">
+                <div class="pl-3 text-accent-gold">
+                    <span class="material-symbols-outlined text-[20px]">search</span>
+                </div>
+                <input type="text" name="q" value="{{ request.GET.q }}" 
+                       class="w-full bg-transparent border-none text-white placeholder-accent-gold/50 text-sm focus:ring-0" 
+                       placeholder="Buscar amigo...">
+            </div>
+        </form>
+
+        <div class="hidden md:flex items-center gap-3 pl-4 border-l border-border-gold">
+            <div class="text-right">
+                <p class="text-xs text-accent-gold font-bold uppercase">Hola,</p>
+                <p class="text-sm font-bold text-white">{{ request.user.username }}</p>
+            </div>
+            <div class="size-10 rounded-full bg-[#221f10] border border-primary flex items-center justify-center text-primary font-bold text-lg">
+                {{ request.user.username|slice:":1"|upper }}
             </div>
         </div>
-
-        <div class="col-span-4 text-center">
-            <span class="bg-surface-dark px-3 py-1 rounded text-sm font-bold text-accent-gold border border-border-gold">
-                {{ jugador.aciertos }} aciertos
-            </span>
-        </div>
-
-        <div class="col-span-2 text-right">
-            <span class="text-2xl font-black text-primary">{{ jugador.aciertos }}</span>
-            <span class="text-[10px] block text-gray-500 font-bold uppercase">PTS</span>
-        </div>
-
     </div>
-    {% empty %}
-    <div class="text-center py-10 text-gray-500">
-        <p>Aún no hay jugadores registrados.</p>
+</header>
+
+<main class="flex-1 flex flex-col items-center px-4 py-10 w-full max-w-[1000px] mx-auto">
+    
+    <div class="text-center mb-10">
+        <h1 class="text-white tracking-tight text-3xl md:text-5xl font-extrabold uppercase italic mb-2">Ranking Global</h1>
+        <p class="text-accent-gold text-sm md:text-lg font-medium max-w-2xl mx-auto">
+            Seguí la carrera hacia los Premios de la Academia. <br>Competí en tiempo real contra amigos y fanáticos del cine.
+        </p>
     </div>
-    {% endfor %}
-</div>
+
+    <div class="w-full mb-8 border-b border-border-gold flex justify-center gap-8">
+        <button class="border-b-[3px] border-primary text-white pb-3 px-4 font-bold uppercase tracking-widest text-sm">Global</button>
+        <button class="border-b-[3px] border-transparent text-accent-gold pb-3 px-4 font-bold uppercase tracking-widest text-sm hover:text-white transition">Amigos</button>
+    </div>
+
+    <div class="w-full flex flex-col gap-3">
+        {% for jugador in usuarios %}
+        <div class="grid grid-cols-12 gap-2 md:gap-4 px-4 py-4 items-center rounded-xl border border-border-gold/40 bg-surface-dark/30 hover:bg-surface-dark hover:border-primary/50 transition-all group {% if request.user == jugador %}bg-primary/10 border-primary{% endif %}">
+            
+            <div class="col-span-2 md:col-span-1 text-center">
+                {% if forloop.counter == 1 %}
+                    <span class="material-symbols-outlined text-primary text-3xl drop-shadow-[0_0_10px_rgba(242,208,13,0.5)]">emoji_events</span> 
+                {% elif forloop.counter == 2 %}
+                    <span class="text-2xl font-black text-gray-300">#2</span>
+                {% elif forloop.counter == 3 %}
+                    <span class="text-2xl font-black text-[#cd7f32]">#3</span> 
+                {% else %}
+                    <span class="text-xl font-bold text-gray-500">#{{ forloop.counter }}</span>
+                {% endif %}
+            </div>
+
+            <div class="col-span-7 md:col-span-6 flex items-center gap-4">
+                <div class="size-10 rounded-full bg-background-dark border border-border-gold flex items-center justify-center text-accent-gold font-bold shadow-lg">
+                    {{ jugador.username|slice:":1"|upper }}
+                </div>
+                <div class="flex flex-col">
+                    <p class="text-white font-bold text-base md:text-lg leading-none group-hover:text-primary transition-colors">
+                        {{ jugador.username }} 
+                        {% if request.user == jugador %} <span class="bg-primary text-black text-[10px] px-1.5 py-0.5 rounded ml-2 uppercase font-black">Tú</span> {% endif %}
+                    </p>
+                    <p class="text-[10px] text-gray-500 uppercase tracking-widest mt-1 font-bold">
+                        {% if forloop.counter == 1 %}Líder Actual{% else %}Competidor{% endif %}
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-span-3 md:col-span-3 text-center hidden md:block">
+                <span class="bg-black/30 px-3 py-1 rounded-full text-xs font-bold text-accent-gold border border-border-gold/50">
+                    {{ jugador.aciertos }} aciertos
+                </span>
+            </div>
+
+            <div class="col-span-3 md:col-span-2 text-right pr-2">
+                <span class="text-2xl font-black text-primary">{{ jugador.aciertos }}</span>
+                <span class="text-[9px] block text-accent-gold/60 font-bold uppercase tracking-wider">PUNTOS</span>
+            </div>
+
+        </div>
+        {% empty %}
+        <div class="text-center py-12 border border-dashed border-border-gold rounded-xl">
+            <span class="material-symbols-outlined text-4xl text-gray-600 mb-2">search_off</span>
+            <p class="text-gray-500">No se encontraron jugadores.</p>
+            {% if request.GET.q %}
+            <a href="{% url 'leaderboard' %}" class="text-primary hover:underline text-sm mt-2 inline-block">Borrar búsqueda</a>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+
+</main>
+
+<footer class="border-t border-border-gold bg-surface-dark py-8 text-center mt-auto">
+    <p class="text-accent-gold/40 text-xs uppercase tracking-widest">© 2026 Prode Oscars</p>
 </footer>
-</body></html>
+
+</body>
+</html>

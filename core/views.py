@@ -4,34 +4,60 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
 from .models import Categoria, Voto, Nominado
+from django.contrib import messages
 
 def home(request):
     if request.method == 'POST':
         if not request.user.is_authenticated:
-            return redirect('login') # Obligar a loguearse para votar
+            return redirect('login')
             
+        votos_guardados = False
+        
         for key, value in request.POST.items():
             if key.startswith('categoria_'):
                 categoria_id = int(key.split('_')[1])
                 nominado_id = int(value)
+                
                 categoria = Categoria.objects.get(id=categoria_id)
                 nominado = Nominado.objects.get(id=nominado_id)
                 
-                Voto.objects.update_or_create(
-                    usuario=request.user,
-                    categoria=categoria,
-                    defaults={'nominado': nominado}
-                )
+                # BLINDAJE 1: Solo guardamos si NO existe un voto previo en esta categoría
+                if not Voto.objects.filter(usuario=request.user, categoria=categoria).exists():
+                    Voto.objects.create(
+                        usuario=request.user,
+                        categoria=categoria,
+                        nominado=nominado
+                    )
+                    votos_guardados = True
+        
+        if votos_guardados:
+            messages.success(request, '¡Tus predicciones se han guardado correctamente!')
+        else:
+            # Si intentó votar pero no se guardó nada (ej: intentó hackear el HTML para cambiar voto)
+            messages.info(request, 'No se realizaron cambios (las categorías votadas están bloqueadas).')
+            
         return redirect('home')
 
+    # --- Lógica GET ---
     categorias = Categoria.objects.prefetch_related('nominados').all()
-    
-    # Calcular puntos del usuario actual para mostrar en el header
     puntos = 0
+    votos_ids = []           # IDs de los nominados (para marcar el check)
+    categorias_votadas_ids = [] # IDs de las categorías (para bloquear el grupo entero)
+    
     if request.user.is_authenticated:
         puntos = Voto.objects.filter(usuario=request.user, nominado__es_ganador=True).count()
+        
+        # Recuperamos los votos del usuario
+        votos_usuario = Voto.objects.filter(usuario=request.user)
+        votos_ids = list(votos_usuario.values_list('nominado_id', flat=True))
+        categorias_votadas_ids = list(votos_usuario.values_list('categoria_id', flat=True))
 
-    return render(request, 'core/home.html', {'categorias': categorias, 'puntos': puntos})
+    return render(request, 'core/home.html', {
+        'categorias': categorias, 
+        'puntos': puntos,
+        'votos_ids': votos_ids,
+        'categorias_votadas_ids': categorias_votadas_ids # <--- Nueva variable enviada al HTML
+    })
 
 def registro(request):
     if request.method == 'POST':
@@ -55,10 +81,15 @@ def logout_view(request):
     return redirect('home')
 
 def leaderboard(request):
+
+    query = request.GET.get('q')
     # Calcular puntaje para todos los usuarios
     # Esto cuenta cuántos votos tiene cada usuario donde el nominado es ganador
     usuarios = User.objects.annotate(
         aciertos=Count('voto', filter=Q(voto__nominado__es_ganador=True))
     ).order_by('-aciertos')
+
+    if query:
+        usuarios = usuarios.filter(username__contains=query)
     
     return render(request, 'core/leaderboard.html', {'usuarios': usuarios})
