@@ -5,12 +5,34 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Count, Q
 from .models import Categoria, Voto, Nominado
 from django.contrib import messages
+from django.utils import timezone
+import datetime
 
 def home(request):
+
+    FECHA_LIMITE = timezone.make_aware(datetime.datetime(2026, 3, 15, 20, 0))
     if request.method == 'POST':
         if not request.user.is_authenticated:
             return redirect('login')
-            
+        
+
+        if timezone.now() > FECHA_LIMITE:
+            messages.error(request, "La votación ya ha cerrado.")
+            return redirect('home')
+        
+        # 1. Contamos cuántas categorías existen en total
+        total_categorias = Categoria.objects.count()
+        
+        # 2. Contamos cuántos votos llegaron en este formulario
+        # (Filtramos solo las claves que empiezan con 'categoria_')
+        votos_enviados = len([k for k in request.POST if k.startswith('categoria_')])
+        
+        # 3. Comparamos: Si envió menos votos que el total de categorías...
+        if votos_enviados < total_categorias:
+            messages.error(request, f"Error: Debes votar en TODAS las {total_categorias} categorías para poder guardar.")
+            return redirect('home') # <--- Rechazamos y devolvemos al usuario
+        # --------------------------------------------
+
         votos_guardados = False
         
         for key, value in request.POST.items():
@@ -21,7 +43,7 @@ def home(request):
                 categoria = Categoria.objects.get(id=categoria_id)
                 nominado = Nominado.objects.get(id=nominado_id)
                 
-                # BLINDAJE 1: Solo guardamos si NO existe un voto previo en esta categoría
+                # BLINDAJE: Solo guardamos si NO existe un voto previo
                 if not Voto.objects.filter(usuario=request.user, categoria=categoria).exists():
                     Voto.objects.create(
                         usuario=request.user,
@@ -33,21 +55,18 @@ def home(request):
         if votos_guardados:
             messages.success(request, '¡Tus predicciones se han guardado correctamente!')
         else:
-            # Si intentó votar pero no se guardó nada (ej: intentó hackear el HTML para cambiar voto)
-            messages.info(request, 'No se realizaron cambios (las categorías votadas están bloqueadas).')
+            messages.info(request, 'No se realizaron cambios (las categorías votadas ya están registradas).')
             
         return redirect('home')
 
     # --- Lógica GET ---
     categorias = Categoria.objects.prefetch_related('nominados').all()
     puntos = 0
-    votos_ids = []           # IDs de los nominados (para marcar el check)
-    categorias_votadas_ids = [] # IDs de las categorías (para bloquear el grupo entero)
+    votos_ids = []
+    categorias_votadas_ids = []
     
     if request.user.is_authenticated:
         puntos = Voto.objects.filter(usuario=request.user, nominado__es_ganador=True).count()
-        
-        # Recuperamos los votos del usuario
         votos_usuario = Voto.objects.filter(usuario=request.user)
         votos_ids = list(votos_usuario.values_list('nominado_id', flat=True))
         categorias_votadas_ids = list(votos_usuario.values_list('categoria_id', flat=True))
@@ -56,18 +75,21 @@ def home(request):
         'categorias': categorias, 
         'puntos': puntos,
         'votos_ids': votos_ids,
-        'categorias_votadas_ids': categorias_votadas_ids # <--- Nueva variable enviada al HTML
+        'categorias_votadas_ids': categorias_votadas_ids
     })
-
 def registro(request):
     if request.method == 'POST':
         usuario = request.POST.get('username')
         email = request.POST.get('email')
         clave = request.POST.get('password')
         
-        # Validación simple
+        # Validación: Si el usuario ya existe
         if User.objects.filter(username=usuario).exists():
-            return render(request, 'registration/registro.html', {'error': 'El usuario ya existe'})
+            return render(request, 'registration/registro.html', {
+                'error': 'El usuario ya existe',
+                'username_previo': usuario, # <--- Devolvemos el nombre
+                'email_previo': email       # <--- Devolvemos el email
+            })
         
         # Crear usuario
         user = User.objects.create_user(username=usuario, email=email, password=clave)
@@ -81,15 +103,14 @@ def logout_view(request):
     return redirect('home')
 
 def leaderboard(request):
-
     query = request.GET.get('q')
-    # Calcular puntaje para todos los usuarios
-    # Esto cuenta cuántos votos tiene cada usuario donde el nominado es ganador
+    
+    # Agregamos 'username' como segundo criterio de orden (desempate)
     usuarios = User.objects.annotate(
         aciertos=Count('voto', filter=Q(voto__nominado__es_ganador=True))
-    ).order_by('-aciertos')
+    ).order_by('-aciertos', 'username') # <--- Orden: Primero aciertos, luego nombre
 
     if query:
-        usuarios = usuarios.filter(username__contains=query)
+        usuarios = usuarios.filter(username__icontains=query)
     
     return render(request, 'core/leaderboard.html', {'usuarios': usuarios})
