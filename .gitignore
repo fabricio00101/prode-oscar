@@ -1,2 +1,3 @@
 venv/
 stitch_oscars_prediction_dashboard_cinematic_dark/
+db.sqlite3/
