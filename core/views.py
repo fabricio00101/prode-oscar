@@ -10,7 +10,7 @@ import datetime
 
 def home(request):
 
-    FECHA_LIMITE = timezone.make_aware(datetime.datetime(2026, 3, 15, 20, 0))
+    FECHA_LIMITE = timezone.make_aware(datetime.datetime(2026, 3, 15, 23, 59))
     if request.method == 'POST':
         if not request.user.is_authenticated:
             return redirect('login')

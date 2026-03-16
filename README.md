@@ -1,21 +1,23 @@
 # 🏆 Prode Oscars 2026
 
+![Vista principal de la aplicación](media/screenshot.png)
+
 Una aplicación web interactiva desarrollada en Django para predecir los ganadores de los Premios de la Academia 2026. Los usuarios pueden registrarse, armar sus predicciones en distintas categorías y competir en una tabla de posiciones global.
 
 ## ✨ Características Principales
 
-* **Sistema de Autenticación:** Registro de usuarios y login seguro nativo de Django.
-* **Votación Inteligente:** * **Validación "Todo o Nada":** Los usuarios deben completar obligatoriamente todas las categorías para poder guardar sus predicciones.
-  * **Seguridad de Voto:** Una vez enviado el formulario, las predicciones quedan bloqueadas (visualizadas con un candado) para evitar cambios de último momento.
-* **Fecha Límite (Hard Deadline):** Cierre automático del sistema de votación configurado mediante `timezone` para el 15 de marzo de 2026 a las 20:00 hs.
-* **Leaderboard Dinámico:** Tabla de posiciones en tiempo real que calcula los puntos automáticamente (1 acierto = 1 punto). Incluye criterio de desempate alfabético y buscador de usuarios.
-* **Diseño UI/UX:** Interfaz moderna y responsiva estilo *Cinematic Dark & Gold* utilizando Tailwind CSS, con feedback visual (notificaciones toast, estados de error y éxito).
+- **Sistema de Autenticación:** Registro de usuarios y login seguro nativo de Django.
+- **Votación Inteligente:** \* **Validación "Todo o Nada":** Los usuarios deben completar obligatoriamente todas las categorías para poder guardar sus predicciones.
+  - **Seguridad de Voto:** Una vez enviado el formulario, las predicciones quedan bloqueadas (visualizadas con un candado) para evitar cambios de último momento.
+- **Fecha Límite (Hard Deadline):** Cierre automático del sistema de votación configurado mediante `timezone` para el 15 de marzo de 2026 a las 20:00 hs.
+- **Leaderboard Dinámico:** Tabla de posiciones en tiempo real que calcula los puntos automáticamente (1 acierto = 1 punto). Incluye criterio de desempate alfabético y buscador de usuarios.
+- **Diseño UI/UX:** Interfaz moderna y responsiva estilo _Cinematic Dark & Gold_ utilizando Tailwind CSS, con feedback visual (notificaciones toast, estados de error y éxito).
 
 ## 🛠️ Tecnologías Utilizadas
 
-* **Backend:** Python 3, Django 5.x
-* **Base de Datos:** SQLite3 (ideal para despliegues locales y portabilidad)
-* **Frontend:** HTML5, Tailwind CSS (vía CDN), Google Fonts (Be Vietnam Pro), Material Symbols.
+- **Backend:** Python 3, Django 5.x
+- **Base de Datos:** SQLite3 (ideal para despliegues locales y portabilidad)
+- **Frontend:** HTML5, Tailwind CSS (vía CDN), Google Fonts (Be Vietnam Pro), Material Symbols.
 
 ---
 
@@ -24,44 +26,56 @@ Una aplicación web interactiva desarrollada en Django para predecir los ganador
 Sigue estos pasos para ejecutar el proyecto en tu computadora.
 
 ### 1. Clonar el repositorio
+
 ```bash
 git clone [https://github.com/TU_USUARIO/prode-oscar.git](https://github.com/TU_USUARIO/prode-oscar.git)
 cd prode-oscar
 ```
 
 ### 2. Crear y activar el Entorno Virtual
+
 Es una buena práctica aislar las dependencias del proyecto.
 
 **En Windows:**
+
 ```powershell
 python -m venv venv
 venv\Scripts\activate
 ```
-*(Nota: Si usas Git Bash en Windows, el comando es `source venv/Scripts/activate`)*
+
+_(Nota: Si usas Git Bash en Windows, el comando es `source venv/Scripts/activate`)_
 
 **En Linux / macOS:**
+
 ```bash
 python3 -m venv venv
 source venv/bin/activate
 ```
 
 ### 3. Instalar las dependencias
+
 Con el entorno virtual activado, instala Django y demás librerías necesarias:
+
 ```bash
 pip install -r requirements.txt
 ```
 
 ### 4. Configurar la Base de Datos
+
 Ejecuta las migraciones para generar el archivo `db.sqlite3` y las tablas necesarias:
+
 ```bash
 python manage.py migrate
 ```
 
 ### 5. Ejecutar el Servidor
+
 Inicia el servidor de desarrollo de Django:
+
 ```bash
 python manage.py runserver
 ```
+
 Visita `http://127.0.0.1:8000/` en tu navegador para ver la página y comenzar a jugar.
 
 ---
@@ -95,4 +109,4 @@ prode_oscar/
 
 ---
 
-*Desarrollado para los Oscars 2026.* 🍿🎬
+_Desarrollado para los Oscars 2026._ 🍿🎬
