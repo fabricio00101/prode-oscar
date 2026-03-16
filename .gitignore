@@ -1,4 +1,4 @@
-venv/
-stitch_oscars_prediction_dashboard_cinematic_dark/
-db.sqlite3
 media/
+__pycache__/
+*.pyc
+.DS_Store
